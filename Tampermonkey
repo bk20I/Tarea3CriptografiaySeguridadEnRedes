@@ -1,0 +1,48 @@
+// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       Axl
+// @match        http://127.0.0.1:5000/
+// @grant        none
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/x64-core.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/hmac-sha256.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/enc-utf8.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/enc-utf16.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/format-hex.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/enc-base64.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/enc-hex.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/format-hex.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/pbkdf2.min.js
+
+// @grant       GM_log
+// ==/UserScript==
+
+
+
+(function() {
+    'use strict';
+
+    const input = document.getElementById('hash');
+    var hashStringHex = input.value;
+    console.log(hashStringHex);
+    function encryptHex(word){
+       
+        return CryptoJS.enc.Hex.parse(word.toString())
+    }
+    var crc32 = encryptHex(hashStringHex);
+    console.log(crc32)
+
+    /*En este punto tenemos la llave en un objeto array de largo 8, cada uno con 32 bits, posteriormente es imposible decifrar el mensaje aplicando la logica de este algoritmo CRC-32 debido a que podría ser considerado como una caja negra,
+    por lo tanto sera necesario utilizar datos como la llave, el mensaje, junto con algoritmos de texto cifrado.*/
+    var key256Bits = CryptoJS.PBKDF2("HelloWorld", crc32, {
+        keySize: 256 / 32
+    });
+
+    console.log(key256Bits)
+    
+    
+    // Your code here...
+})();
