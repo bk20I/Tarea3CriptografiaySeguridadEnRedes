@@ -7,8 +7,7 @@ Se Utilizo la librería de crypto tanto en python como javascript para analizar 
 
 Desarrollo.
 
-Para comenzar se decidió utilizar hash256 para encriptar el mensaje en python, para esto fue necesario importar las siguientes librerías.
-*from base64 import b64encode
+Para comenzar se decidió utilizar hash256 para encriptar el mensaje en python, para esto fue necesario importar la siguiente librería.
 *import hashlib 
 
 
