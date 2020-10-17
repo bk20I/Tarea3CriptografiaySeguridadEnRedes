@@ -48,7 +48,7 @@
 
     };
    var decrypted = CryptoJS.AES.decrypt(encrypted, "Helloworld", {
-  format: JsonFormatter
+
    });
 
    decrypted.toString(CryptoJS.enc.Utf8)
